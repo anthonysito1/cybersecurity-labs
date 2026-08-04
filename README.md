@@ -6,11 +6,34 @@ Welcome! This repository serves as an index for my hands-on cybersecurity labs, 
 
 This is a collection of some of the highlights. Please feel free to look at my profile and see the 20+ other labs and LetsDefend cases I've done. 
 
+# Tools:
+* ELK Stack, Wireshark, Sysmon, Splunk, Tenable Nessus, CyberChef, Linux, Sandbox
+
+Network diagram:
+graph TB
+    subgraph LAN["Home LAN — 10.0.0.0/24"]
+        Router["Router / Pi-hole + VPN<br/>10.0.0.1"]
+        Server["Debian Server<br/>10.0.0.208<br/>Jellyfin, Actual Budget, Docker svcs"]
+        PC["Linux Mint XFCE Host<br/>10.0.0.45"]
+    end
+
+    subgraph VBOX["VirtualBox Host-Only Network — 192.168.56.0/24"]
+        Win10["Windows 10 VM<br/>192.168.56.104<br/>Sysmon + Winlogbeat"]
+        WinServer["Windows Server VM<br/>192.168.56.103"]
+        Kali["Kali Linux VM<br/>192.168.56.101<br/>Attack Box"]
+    end
+
+    Router --> Server
+    Router --> PC
+    PC -->|Hosts| VBOX
+    Win10 -->|Logs forwarded| ELK["ELK Stack"]
+    Kali -.Simulated Attacks.-> Win10
+
 ## 📂 Indexed Labs & Write-ups
 
 ### 🔹 Blue Team SOC Labs:
 ### 🔹 Windows Event Log Parsing & RDP Brute Force Analysis
-*   **Lab Write-up:** [SOC Lab Write-up — Introduction & First Attack](https://medium.com/@anthonysito1/soc-lab-writeup-introduction-first-attack-f0fdedbabab5?postPublishedType=repub)
+*   **Lab Write-up:** [SOC Lab Write-up — Introduction & First Attack](https://medium.com/@anthonysito1/soc-lab-writeup-introduction-first-attack-f0fdedbabab5)
 *   **Objective:** Deploy Winlogbeat and Sysmon to monitor a Windows 10 endpoint, simulate an RDP brute-force attack from a Kali Linux VM, and perform incident triage in Kibana.
 *   **Related MITRE ATT&CK Framework:** Brute Force: Password Guessing (T1110.001), Remote Services: Remote Desktop Protocol (T1021.001)
 *   **Key Skills Demonstrated:**
@@ -20,7 +43,7 @@ This is a collection of some of the highlights. Please feel free to look at my p
     *   Distinguishing true malicious attacks from user-induced False Positives.
 *   **Defensive Takeaways:** Proposed implementing standard Group Policy Account Lockout thresholds and alerting rules for Event ID `4740`.
 ### 🔹 Advanced Endpoint Detection: Backdoors, Privilege Escalation, & Persistence
-*   **Lab Write-up:** [SOC Lab 2 — Backdoor, Group Add, & Scheduled Task Detection](https://medium.com/@anthonysito1/soc-lab-2-backdoor-group-add-scheduled-task-detection-31898690f0da?postPublishedType=repub)
+*   **Lab Write-up:** [SOC Lab 2 — Backdoor, Group Add, & Scheduled Task Detection](https://medium.com/@anthonysito1/soc-lab-2-backdoor-group-add-scheduled-task-detection-31898690f0da)
 *   **Objective:** Analyze a complete post-exploitation lifecycle within Kibana. Detect local account creation, privilege escalation to the Administrators group, and persistence mechanisms.
 *   **Related MITRE ATT&CK Framework:** User Execution: Malicious File (T1204.002), C2 Connection: Application Layer Protocol (T1071), Scheduled Task/Job: Scheduled Task (T1053.005)
 *   **Key Skills Demonstrated:**
@@ -30,7 +53,7 @@ This is a collection of some of the highlights. Please feel free to look at my p
     *   **Attacker Behavior Mapping:** Correlated a surge in `whoami` discovery commands with privilege escalation events.
 *   **Defensive Takeaways:** Recommended immediate host isolation/quarantine to cut off active Command and Control (C2) communication.
 ### 🔹 Fileless Malware: Obfuscated PowerShell & Network Forensics
-*   **Lab Write-up:** [SOC Lab 10 — Fileless PowerShell via Base64 Encoding Attack](https://medium.com/@anthonysito1/soc-lab-10-fileless-powershell-via-base64-encoding-attack-a6068f85d124?postPublishedType=repub)
+*   **Lab Write-up:** [SOC Lab 10 — Fileless PowerShell via Base64 Encoding Attack](https://medium.com/@anthonysito1/soc-lab-10-fileless-powershell-via-base64-encoding-attack-a6068f85d124)
 *   **Objective:** Investigate a malicious connection with Remote Desktop Protocol (RDP) and de-obfuscate a fileless PowerShell reverse shell payload executing in memory.
 *   **Related MITRE ATT&CK Framework:** Remote Services: Remote Desktop Protocol (T1021.001), Command and Scripting Interpreter: Powershell (T1059.001), Obfuscated Files or Information: Command Obfuscation (T1027.010)
 *   **Key Skills Demonstrated:**
@@ -40,7 +63,7 @@ This is a collection of some of the highlights. Please feel free to look at my p
     *   **Egress Traffic Validation:** Queried Sysmon Event ID `3` to cross-reference network connections, verifying the connection to determine if C2 sessions or data exfiltration occurred.
 *   **Defensive Takeaways:** Recommended narrowing corporate RDP exposure to specific VPN entry gateways, enabling PowerShell Constrained Language Mode (CLM), and building SIEM alerts for command-line encoding arguments.
 ### 🔹 Linux Host Forensics: SSH Compromise & Log Destruction Triage
-*   **Lab Write-up:** [SOC Lab 20 — Log Destruction](https://medium.com/@anthonysito1/soc-lab-20-log-destruction-0e59f75aeba8?postPublishedType=repub)
+*   **Lab Write-up:** [SOC Lab 20 — Log Destruction](https://medium.com/@anthonysito1/soc-lab-20-log-destruction-0e59f75aeba8)
 *   **Objective:** Shift security telemetry monitoring to a native Linux environment (`Linux Mint`), analyzing an active credential abuse vector over SSH followed by anti-forensics log tampering actions.
 *   **Related MITRE ATT&CK Framework:** Defense Evasion: Indicator Removal (T1070)
 *   **Key Skills Demonstrated:**
@@ -68,15 +91,25 @@ This is a collection of some of the highlights. Please feel free to look at my p
     *   **Lateral Movement Auditing:** Reconstructed a `wmiexec` remote administrative pipeline by correlating `WmiPrvSE.exe` processes, loopback address communication states, and Windows Event ID `5145` (SMB/ADMIN$ Share access).
 *   **Defensive Takeaways:** Recommended registry-level auditing of service binary paths to enforce string quotation encapsulations, hardening root folder file-write system permissions, and restricting interactive host SMB access.
 
+### 🔹 Denaial of Service Attack and Remote Desktop Protocol Brute Force Attack
+*   **Lab Write-up:** [DoS Attack Attempt + RDP Abuse](https://medium.com/@anthonysito1/soc-lab-27-dos-attack-attempt-rdp-abuse-7b05c4beefba)
+*   **Objective:** Investigate a Denial of Service Attack and RDP brute force attack using nothing but Wireshark.
+*   **Related MITRE ATT&CK Framework:** Endpoint Denial of Service:T1499.001 — OS Exhaustion Flood (SYN ATTACK), Brute Force: T1110.001 — Password Guessing
+*   **Key Skills Demonstrated:**
+    *   **Wireshark Proficiency:** Used Wireshark to identify an attack the SIEM was not able to pick up on and find the culprit.
+    *   **DoS Attack Identification:** Identified the attack as a "SYN flag" DoS attack due to the packets captured in Wireshark.
+    *   **Successful login identification:** Found where and how the attacke was able to connect to the victim host via RDP.
+*   **Defensive Takeaways:** Recommended rate limiting to avoid service impacts and brute force attempts, increasing server capacity, and load balancing servers.
+
 ### 🔹 Vulnerability Assessment w/ Scanner:
 *   **Write-up:** [Vulnerability Assessment and Remediation Lab — Tenable Nessus Essentials](https://medium.com/@anthonysito1/vulnerability-assessment-and-remediation-lab-tenable-nessus-essentials-3c305451c514)
 *   **Objective:** Practice with a vulnerability scanner (specifically one of the most used brands, Tenable Nessus) and  ensure my home network is secure.
 *   **Machines analyzed:**
     *   **ASUS Router** My personal router.
-    *   **My Server** Debian Linux Server I created with multiple services such as Jellyfin, Pihole, a native VPN, and a budnle of Docker services I've configured.
+    *   **My Server** Debian Linux Server I created with multiple services such as Jellyfin, Pihole, a native VPN, and a bundle of Docker services I've configured.
     *   **VM's** I also analyzed the Windows Server VM and Kali Linux VM I often use for running the SOC labs shown above.
-    *   **My PC** I run Mint Linux and was surprised by some of the vulnerabilities found by the scanner.
-*   **Defensive Takeaways:** Change management and confirming that updates are actually going through is very important. 
+    *   **My PC** I run a Mint Linux distro and was surprised by some of the vulnerabilities found by the scanner.
+*   **Defensive Takeaways:** Change management and confirming that updates are actually going through is very important. Reguarly assessing vulnerabilities is a critical part of security.
 
 ### 🔹 LetsDefend Case Writeups:
 * https://medium.com/@anthonysito1/soc338-lumma-stealer-dll-side-loading-via-click-fix-phishing-1bc2dca4a9e4 – LetsDefend SIEM challenge for alert on DLL Side-Loading
@@ -87,7 +120,7 @@ This is a collection of some of the highlights. Please feel free to look at my p
 * https://medium.com/@anthonysito1/pdf-analysis-letsdefend-challenge-82e36868598a - LetsDefend challenge analyzing a malicious PDF.
 * https://medium.com/@anthonysito1/soc202-fakegpt-malicious-chrome-extension-8a1208468ce2 - LetsDefend SIEM challenge involving a malicious Chrome extension. 
 
-There are dozens of more case writeups on my medium as well, these are just what I believe are some of the best.
+There are dozens of more case writeups on my Medium as well, these are just what I believe are some of the best.
 
 ---
 ## 📬 Connect with Me
