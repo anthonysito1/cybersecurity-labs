@@ -29,6 +29,7 @@ graph TB
     PC -->|Hosts| VBOX
     Win10 -->|Logs forwarded| ELK["ELK Stack"]
     Kali -.Simulated Attacks.-> Win10
+    Kali -.Simulated Attacks.-> WinServer
 ```
 ## 📂 Indexed Labs & Write-ups
 
