@@ -10,7 +10,7 @@ This is a collection of some of the highlights. Please feel free to look at my p
 * ELK Stack, Wireshark, Sysmon, Splunk, Tenable Nessus, CyberChef, Linux, Sandbox
 
 Network diagram:
-```
+```mermaid
 graph TB
     subgraph LAN["Home LAN — 10.0.0.0/24"]
         Router["Router / Pi-hole + VPN<br/>10.0.0.1"]
