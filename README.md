@@ -68,6 +68,16 @@ This is a collection of some of the highlights. Please feel free to look at my p
     *   **Lateral Movement Auditing:** Reconstructed a `wmiexec` remote administrative pipeline by correlating `WmiPrvSE.exe` processes, loopback address communication states, and Windows Event ID `5145` (SMB/ADMIN$ Share access).
 *   **Defensive Takeaways:** Recommended registry-level auditing of service binary paths to enforce string quotation encapsulations, hardening root folder file-write system permissions, and restricting interactive host SMB access.
 
+### 🔹 Vulnerability Assessment w/ Scanner:
+*   **Write-up:** [Vulnerability Assessment and Remediation Lab — Tenable Nessus Essentials](https://medium.com/@anthonysito1/vulnerability-assessment-and-remediation-lab-tenable-nessus-essentials-3c305451c514)
+*   **Objective:** Practice with a vulnerability scanner (specifically one of the most used brands, Tenable Nessus) and  ensure my home network is secure.
+*   **Machines analyzed:**
+    *   **ASUS Router** My personal router.
+    *   **My Server** Debian Linux Server I created with multiple services such as Jellyfin, Pihole, a native VPN, and a budnle of Docker services I've configured.
+    *   **VM's** I also analyzed the Windows Server VM and Kali Linux VM I often use for running the SOC labs shown above.
+    *   **My PC** I run Mint Linux and was surprised by some of the vulnerabilities found by the scanner.
+*   **Defensive Takeaways:** Change management and confirming that updates are actually going through is very important. 
+
 ### 🔹 LetsDefend Case Writeups:
 * https://medium.com/@anthonysito1/soc338-lumma-stealer-dll-side-loading-via-click-fix-phishing-1bc2dca4a9e4 – LetsDefend SIEM challenge for alert on DLL Side-Loading
 * https://medium.com/@anthonysito1/soc167-ls-command-detected-in-requested-url-99cd0cfbd54b – LetsDefend SIEM challenge for false alarm alert where "ls" is in the URL.
