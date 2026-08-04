@@ -95,9 +95,9 @@ graph TB
 *   **Defensive Takeaways:** Recommended registry-level auditing of service binary paths to enforce string quotation encapsulations, hardening root folder file-write system permissions, and restricting interactive host SMB access.
 
 ### 🔹 Denaial of Service Attack and Remote Desktop Protocol Brute Force Attack
-*   **Lab Write-up:** [DoS Attack Attempt + RDP Abuse](https://medium.com/@anthonysito1/soc-lab-27-dos-attack-attempt-rdp-abuse-7b05c4beefba)
+*   **Lab Write-up:** [SOC Lab 27 - DoS Attack Attempt + RDP Abuse](https://medium.com/@anthonysito1/soc-lab-27-dos-attack-attempt-rdp-abuse-7b05c4beefba)
 *   **Objective:** Investigate a Denial of Service Attack and RDP brute force attack using nothing but Wireshark.
-*   **Related MITRE ATT&CK Framework:** Endpoint Denial of Service:T1499.001 — OS Exhaustion Flood (SYN ATTACK), Brute Force: T1110.001 — Password Guessing
+*   **Related MITRE ATT&CK Framework:** Endpoint Denial of Service: OS Exhaustion Flood (T1499.001), Brute Force: Password Guessing (T1110.001) 
 *   **Key Skills Demonstrated:**
     *   **Wireshark Proficiency:** Used Wireshark to identify an attack the SIEM was not able to pick up on and find the culprit.
     *   **DoS Attack Identification:** Identified the attack as a "SYN flag" DoS attack due to the packets captured in Wireshark.
