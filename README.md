@@ -7,9 +7,9 @@ Welcome! This repository serves as an index for my hands-on cybersecurity labs, 
 This is a collection of some of the highlights. Please feel free to look at my profile and see the 20+ other labs and LetsDefend cases I've done. 
 
 # Tools:
-* ELK Stack, Wireshark, Sysmon, Splunk, Tenable Nessus, CyberChef, Linux, Sandbox
+* ELK Stack, Winlogbeat, Wireshark, Sysmon, Splunk, Tenable Nessus, CyberChef, Linux, Sandbox, Kali Linux, VirtualBox, Windows, Debian Server
 
-Network diagram:
+# Network diagram:
 ```mermaid
 graph TB
     subgraph LAN["Home LAN — 10.0.0.0/24"]
