@@ -94,7 +94,7 @@ graph TB
     *   **Lateral Movement Auditing:** Reconstructed a `wmiexec` remote administrative pipeline by correlating `WmiPrvSE.exe` processes, loopback address communication states, and Windows Event ID `5145` (SMB/ADMIN$ Share access).
 *   **Defensive Takeaways:** Recommended registry-level auditing of service binary paths to enforce string quotation encapsulations, hardening root folder file-write system permissions, and restricting interactive host SMB access.
 
-### 🔹 Denaial of Service Attack and Remote Desktop Protocol Brute Force Attack
+### 🔹 Denial of Service Attack and Remote Desktop Protocol Brute Force Attack
 *   **Lab Write-up:** [SOC Lab 27 - DoS Attack Attempt + RDP Abuse](https://medium.com/@anthonysito1/soc-lab-27-dos-attack-attempt-rdp-abuse-7b05c4beefba)
 *   **Objective:** Investigate a Denial of Service Attack and RDP brute force attack using nothing but Wireshark.
 *   **Related MITRE ATT&CK Framework:** Endpoint Denial of Service: OS Exhaustion Flood (T1499.001), Brute Force: Password Guessing (T1110.001) 
